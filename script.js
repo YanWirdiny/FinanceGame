@@ -39,3 +39,34 @@ function startTimer() {
 // Start the timer when the page loads
 document.addEventListener('DOMContentLoaded', startTimer);
 
+/* Modal  nfor entering  money 
+
+*/
+// Show the modal
+function showEnterAmountModal() {
+    const modal = document.getElementById('enterAmountModal');
+    modal.style.display = 'block';
+  }
+  
+  // Close the modal
+  function closeEnterAmountModal() {
+    const modal = document.getElementById('enterAmountModal');
+    modal.style.display = 'none';
+  }
+  
+  // Add event listeners
+  document.getElementById('closeModalButton').addEventListener('click', closeEnterAmountModal);
+  
+
+  // laoding page 
+
+  // Hide the loading page after the content is loaded
+// Hide the loading page after 3 seconds
+window.addEventListener('load', () => {
+    setTimeout(() => {
+      const loadingPage = document.getElementById('loadingPage');
+      loadingPage.style.display = 'none'; // Hide the loading page
+    }, 3000); // 3000 milliseconds = 3 seconds
+  });
+  
+  
