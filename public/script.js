@@ -93,65 +93,32 @@ function redirectToPage(pageUrl) {
 // Function to fetch and display financial advice
 async function updateFinancialAdvice() {
     try {
-        // Check if 24 hours have passed since last update
-        const lastUpdate = localStorage.getItem('lastAdviceUpdate');
-        const now = new Date().getTime();
-        
-        if (!lastUpdate || (now - parseInt(lastUpdate)) > 24 * 60 * 60 * 1000) {
-            // Array of financial advice with sources
-            const adviceList = [
-                {
-                    advice: "Create an emergency fund that covers 3-6 months of expenses to protect against unexpected costs.",
-                    source: "Source: Dave Ramsey's Financial Peace"
-                },
-                {
-                    advice: "Follow the 50/30/20 rule: Spend 50% on needs, 30% on wants, and save 20% of your income.",
-                    source: "Source: Senator Elizabeth Warren, 'All Your Worth'"
-                },
-                {
-                    advice: "Pay yourself first - automatically save a portion of your income before spending on other things.",
-                    source: "Source: 'The Richest Man in Babylon' by George S. Clason"
-                },
-                {
-                    advice: "Invest in low-cost index funds for long-term wealth building.",
-                    source: "Source: Warren Buffett, Berkshire Hathaway Annual Letter"
-                },
-                {
-                    advice: "Use the 24-hour rule: Wait 24 hours before making any major purchase to avoid impulse buying.",
-                    source: "Source: Financial Planning Association"
-                },
-                {
-                    advice: "Keep your fixed expenses below 50% of your take-home pay to maintain financial flexibility.",
-                    source: "Source: Suze Orman's Financial Security"
-                }
-            ];
+        // Fetch financial advice from the backend API
+        const response = await fetch('http://localhost:3000/api/financial-advice', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-            // Randomly select advice
-            const randomIndex = Math.floor(Math.random() * adviceList.length);
-            const todaysAdvice = adviceList[randomIndex];
-
-            // Update the DOM
-            document.getElementById('financial-advice').textContent = todaysAdvice.advice;
-            document.getElementById('advice-source').textContent = todaysAdvice.source;
-            document.getElementById('last-updated').textContent = `Updated: ${new Date().toLocaleDateString()}`;
-
-            // Save to localStorage
-            localStorage.setItem('currentAdvice', JSON.stringify(todaysAdvice));
-            localStorage.setItem('lastAdviceUpdate', now.toString());
-        } else {
-            // Load existing advice from localStorage
-            const savedAdvice = JSON.parse(localStorage.getItem('currentAdvice'));
-            if (savedAdvice) {
-                document.getElementById('financial-advice').textContent = savedAdvice.advice;
-                document.getElementById('advice-source').textContent = savedAdvice.source;
-                document.getElementById('last-updated').textContent = `Updated: ${new Date(parseInt(lastUpdate)).toLocaleDateString()}`;
-            }
+        if (!response.ok) {
+            throw new Error('Failed to fetch financial advice');
         }
+
+        const data = await response.json();
+
+        // Update the DOM with the fetched advice
+        document.getElementById('financial-advice').textContent = data.advice;
+        document.getElementById('advice-source').textContent = 'Source: AI Model';
+        document.getElementById('last-updated').textContent = `Updated: ${new Date().toLocaleDateString()}`;
     } catch (error) {
         console.error('Error updating financial advice:', error);
+
+        // Update placeholder text to reflect an error
         document.getElementById('financial-advice').textContent = 'Unable to load financial advice. Please try again later.';
+        document.getElementById('advice-source').textContent = '';
+        document.getElementById('last-updated').textContent = '';
     }
 }
+
 
 // Add this to your existing DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', function() {
