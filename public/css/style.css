@@ -1,8 +1,16 @@
 /* Global Styles */
+
+@font-face {
+    font-family: 'Roundy Rainbows';
+    src: url('../icons/RoundyRainbows.otf') format('opentype'); /* Adjust the path */
+    font-weight: 100;
+    font-style: normal;
+}
 body {
-    font-family: Arial, sans-serif;
+ 
     color: #333;
     line-height: 1.6;
+   
     background-color: #f4f4f9;;
 }
 h1 {
@@ -10,8 +18,9 @@ h1 {
     text-align: center;
 }
 
- h2, h3, h4, h5, h6 {
-    font-weight: bold;
+h5, h6 {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 100;
 }
 
 a {
@@ -107,7 +116,8 @@ nav {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         transition: bottom 0.5s ease, top 0.5s ease; /* Transition for movement */
-        z-index: 1000; 
+        z-index: 1000;
+       
     }
     nav {
         flex-direction: column;
@@ -184,6 +194,8 @@ nav {
         border-radius: 50%;
 }
 #timerButton {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
     font-size: 18px;
     width: 100px;
     height: 100px;
@@ -192,17 +204,20 @@ nav {
     background-color: #ffc800;
     color: white;
     border: none;
-    margin-left: 150px;
+    margin-left: 180px;
     cursor: pointer;
     outline: none;
     transition: background-color 0.3s;
 }
 
 #timerButton :hover {
+    font-family: 'Roundy Rainbows', sans-serif;
     background-color: white;
     color: #ffc800;
 }
 #SavingButton{
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
     font-size: 18px;
     width: 300px;
     height: 70px;
@@ -219,6 +234,8 @@ nav {
 }
 
 #Expensebutton{
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
     font-size: 18px;
     width: 300px;
     height: 70px;
@@ -234,6 +251,8 @@ nav {
 }
 
 #otherbutton{
+font-family:'Roundy Rainbows', sans-serif;
+font-weight: 50;
 font-size: 18px;
 width: 300px;
 height: 70px;
@@ -248,18 +267,39 @@ outline: none;
 transition: background-color 0.3s;
 }
 
+/* Default styling for the buttons */
+#SavingButton, #Expensebutton, #otherbutton {
+    transition: background-color 0.5s, transform 0.5s; /* Smooth animation */
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+}
+
+/* Add hover effect to emphasize interactivity */
+#SavingButton:hover, #Expensebutton:hover, #otherbutton:hover {
+    background-color: #005f73; /* Light gray */
+    cursor: pointer;
+}
+
+/* Highlight animation reset (optional if hover is removed) */
+.card-element {
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
 
 /* Modal */
 /* Modal Styling */
 /* Enhanced Modal Styles */
 .modal {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 100;
     display: none;
     position: absolute;
     top: 0;
     left: 0;
     
-    width: 200%;
-    height: 200%;
+    width: 400%;
+    height: 300%;
     background-color: rgba(0, 0, 0, 0.5);
     
 }
@@ -267,7 +307,7 @@ transition: background-color 0.3s;
 .modal-content {
     position: absolute;
     top: 70%;
-    left: 75%;
+    left: 62.5%;
     transform: translate(-50%, -50%);
     background-color: white;
     padding: 20px;
@@ -303,7 +343,14 @@ transition: background-color 0.3s;
     background-color: #333;
     color: white;
 }
-
+.btn-category {
+    margin: 5px;
+    padding: 10px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 #amountInput {
     width: 100%;
     padding: 10px;

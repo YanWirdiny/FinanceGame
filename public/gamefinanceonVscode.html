@@ -6,6 +6,9 @@
   <title>Yan Budgeting App</title>
   <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+ 
+  
 </head>
 <body>
 
@@ -15,7 +18,7 @@
     <button class="nav-button" onclick="showSection('home')"
     > <img src="icons\home.png" alt="Home" class="icon-image">
   </button></button>
-    <button class="nav-button" onclick="showSection('howto')">
+    <button class="nav-button" onclick="showHowToPlayModal()">
       <img src="icons\question mark.png" alt="Home" class="icon-image"></button>
     <button class="nav-button" onclick="showSection('profile')">
       <img src="icons\profile.png" alt="Home" class="icon-image">
@@ -31,7 +34,7 @@
         <div class="card " style="width: 18rem; border-radius: 30px; margin-top: 90px">
             <ul class="list-group list-group-flush"  style="border-radius: 30px">
               <li class="list-group-item">An item</li>
-              <li class="list-group-item">A second item</li>
+              <li class="list-group-item">Points : 0</li>
               <li class="list-group-item">A third item</li>
             </ul>
           </div>
@@ -42,7 +45,7 @@
             <h5 class="card-title">Special title treatment</h5>
             <p class="card-text">With supporting text below as a natural 
               lead-in to additional content.</p>
-              <a href="addFund.html" 
+              <a  
               class="btn btn-primary" 
               style="border-radius: 15px; background-color: #ffc800; border-color: #ffc800;"
               onclick="showEnterAmountModal()">Add Funds</a>
@@ -64,6 +67,63 @@
         <div class="p-3 ">
           <img src="icons\winkcoin.png" alt=" cetral image " class ="center" id="center">
         </div>
+
+        <div id="enterAmountModal" class="modal">
+          <div class="modal-content">
+              <h2>Enter Amount</h2>
+              <img src="happycoin-removebg-preview.png" alt="icons\happycoin.png" class="modal-image">
+              <input type="number" id="amountInput" placeholder="Enter amount">
+              <div class="modal-buttons">
+                  <button class="btn-confirm" onclick="confirmAmount()">Confirm</button>
+                  <button class="btn-cancel" id="closeModalButton" onclick="closeEnterAmountModal()">Cancel</button>
+              </div>
+          </div>
+      </div>
+
+
+      <!-- How to play modal -->
+
+      <!-- How to Play Modal -->
+<div id="howToPlayModal" class="modal">
+  <div class="modal-content">
+      <h2>How to Play</h2>
+      <p>Welcome to the budgeting game! Here's how to play:</p>
+      <ol>
+          <li>Enter the amount of money you want to allocate.</li>
+          <li>The game will automatically divide it into three categories: Savings, Expenses, and Other.</li>
+          <li>Track your progress as the countdown timer updates every 24 hours.</li>
+          <li>Make sure to stick to your budget and aim for financial goals!</li>
+      </ol>
+      <p>Enjoy managing your finances and leveling up your budgeting skills!</p>
+      <div class="modal-buttons">
+          <button class="btn-confirm" onclick="closeHowToPlayModal()">Close</button>
+      </div>
+  </div>
+</div>
+
+<!--  emergency expenses   modal -->
+  <!-- Emergency Expense Modal -->
+  <div id="emergencyModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+        <h2>Emergency Expense</h2>
+        <p id="expenseDescription">A sudden medical bill has appeared!</p>
+        <p id="expenseAmount">Expense Amount: $<span id="expenseValue">0</span></p>
+        <p>Importance Level: <span id="expenseImportance">High</span></p>
+        <div class="modal-buttons">
+            <button class="btn-confirm" onclick="handleExpense('yes')">Yes</button>
+            <button class="btn-cancel" onclick="handleExpense('no')">no</button>
+        </div>
+        <div id="categorySelection" style="display: none; margin-top: 20px;">
+            <p>Select a category to deduct the expense:</p>
+            <button class="btn-category" onclick="deductExpense('Needs')">Needs</button>
+            <button class="btn-category" onclick="deductExpense('Wants')">Wants</button>
+            <button class="btn-category" onclick="deductExpense('Savings')">Savings</button>
+        </div>
+        <button class="btn-close" onclick="closeEmergencyModal()">Close</button>
+    </div>
+</div>
+
+
     </div>
     <div class="col-md-4 col-12">
         <div class="p-1 ">
@@ -110,7 +170,7 @@
                     <div class="card-element" style="width: 10rem;">
                       <div class="card-body1">
                         <h6 class="card-title"></h6>
-                        <button id="Expensebutton">Csv file </button>
+                        <button id="Expensebutton" onclick="showEmergencyModal()">Csv file </button>
                        </div>
                       </div>
                     </div>
