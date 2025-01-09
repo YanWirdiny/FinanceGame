@@ -9,6 +9,21 @@ image.addEventListener("mouseleave", () => {
 });
 
 
+// Function to show the custom alert
+function showCustomAlert(message) {
+    const alertBox = document.getElementById("customAlert");
+    const alertMessage = document.getElementById("alertMessage");
+
+    alertMessage.innerText = message; // Set the alert message
+    alertBox.classList.remove("hidden"); // Show the alert
+}
+
+// Function to close the custom alert
+function closeCustomAlert() {
+    const alertBox = document.getElementById("customAlert");
+    alertBox.classList.add("hidden"); // Hide the alert
+}
+
 
 // Timer for the #timerButton
 let countdownInterval;
@@ -113,7 +128,7 @@ function highlightCard(cardId) {
      const  totalAmount =  parseFloat(amountInput);
 
      if (isNaN(totalAmount) || totalAmount <= 0) {
-        alert('Please enter a valid amount.');
+        showCustomAlert('Please enter a valid amount.');
         return;
     }
     const savings = (totalAmount * 0.5).toFixed(2); // 50% for savings
@@ -137,7 +152,7 @@ function highlightCard(cardId) {
     if (amount) {
         // Here you can add the logic to process the amount
         distributeAmount();
-        alert(`Amount confirmed: ${amount}`);
+        showCustomAlert(`Amount confirmed: ${amount}`);
         closeEnterAmountModal();
     } else {
         alert('Please enter an amount');

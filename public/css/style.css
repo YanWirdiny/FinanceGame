@@ -343,6 +343,17 @@ transition: background-color 0.3s;
     background-color: #333;
     color: white;
 }
+.btn-close {
+    display: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    background-color: #333;
+    color: white;
+}
 .btn-category {
     margin: 5px;
     padding: 10px;
@@ -381,3 +392,56 @@ transition: background-color 0.3s;
     font-size: 0.8em;
     color: #888;
 } 
+
+/*  alert toggle    customized */
+/* Custom Alert Styling */
+.custom-alert {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-alert.hidden {
+    display: none; /* Hidden by default */
+}
+
+
+.custom-alert-content {
+    background-color: #fff; /* Matches your aesthetic */
+    color: #333; /* Text color */
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.custom-alert-content p {
+    font-family: 'Roundy Rainbows', sans-serif;
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+}
+
+.custom-alert-content .btn-confirm {
+    background-color: #ffc800;
+    color: #333;
+    border: 2px solid #ffc800;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-alert-content .btn-confirm:hover {
+    background-color: #ffc800;
+    color: #fff;
+}
