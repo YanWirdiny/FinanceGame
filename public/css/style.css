@@ -1,0 +1,509 @@
+/* Global Styles */
+
+@font-face {
+    font-family: 'Roundy Rainbows';
+    src: url('../icons/RoundyRainbows.otf') format('opentype'); /* Adjust the path */
+    font-weight: 100;
+    font-style: normal;
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f4f9;
+}
+h1 {
+    font-size: clamp(1.5rem, 2.5vw, 3rem); /* Scales between 1.5rem and 3rem */
+    text-align: center;
+}
+
+h5, h6 {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 100;
+}
+p {
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem); /* Scales between 0.9rem and 1.2rem */
+}
+
+a {
+    text-decoration: none;
+    color: #1a5c88;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/* Layout */ 
+nav {
+ display: flex;
+    justify-content: space-around;
+    background-color: #1a1a1a;
+    display: flex;
+        justify-content: space-around;
+        align-items: center;
+        position: fixed;
+       bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 50%; /* Adjust width as needed */
+        background-color: #1a1a1a; /* Dark background color */
+        padding: 5px;
+        border-bottom: 80px;
+        border-top-left-radius: 50px;
+        border-top-right-radius: 20px;
+        border-radius: 25px;
+        transition: bottom 0.5s ease, top 0.5s ease; /* Transition for movement */
+        z-index: 1000; 
+}
+.container {
+    width: 90%; /* Adjusted for smaller screens */
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1em;
+}
+ header, footer{
+    background-color: #333;
+    color: #fff;
+    padding:  1em; /* to check */
+    text-align: center;
+ }
+ /* component */
+ .modal{
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    padding: 2em;
+    background-color:  white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+
+
+
+ /* Utilities */
+.text-center {
+    text-align: center;
+}
+
+.mb-1 {
+    margin-bottom: 1em;
+}
+
+.mt-2 {
+    margin-top: 2em;
+}
+
+
+
+
+/* Responsive Design */
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Adjust for smaller screens */
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 25px;
+    z-index: 1000;
+}
+
+@media (max-width: 576px) {
+    nav {
+        flex-wrap: wrap; /* Wrap icons to the next row */
+        padding: 15px;
+    }
+
+    .nav-button img {
+        width: 20px; /* Reduce icon size for mobile */
+        height: 20px;
+    }
+}
+
+
+
+
+
+.nav-button {
+     background: none;
+     border: none;
+     cursor: pointer;
+     outline: none;
+     padding: 0.5em;
+     border-radius: 50%;
+     transition: background-color 0.3s;
+     position: relative;
+     color: white
+ }
+
+ /* Hover Effect */
+ .nav-button:hover {
+     background-color: #444; /* Light background for hover */
+ }
+ .nav-button.active::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    width: 48px;
+    height: 48px;
+    background-color: #f4e7c5; /* Light background color around selected button */
+    border-radius: 50%;
+    z-index: -1;
+}
+
+ /* Active Button (selected) */
+ .nav-button.active {
+     background-color: #FFD700; /* Yellow background for active icon */
+ }
+
+ /* Icon Styling */
+ .nav-button img {
+     width: 24px;
+     height: 24px;
+ }
+
+ /* Boostrap 8*/
+  
+ .mb-90px {
+     margin-bottom: 90px;
+     margin-top: 40px;
+    }
+.bd-120{
+    border-radius: 30%;
+}
+/* Image*/
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-top:30px;
+    width: 95%;
+    transition: opacity 0.9s ease;
+    opacity: 1;
+}
+.card-element {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+@media (min-width: 768px) {
+    .card-element {
+        width: 48%; /* Two cards per row for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-element {
+        width: 30%; /* Three cards per row for larger screens */
+    }
+}
+
+.card-body1{
+    background-color: rgba(245, 245, 250, 1); /* White with 70% opacity */
+        padding: 10px;
+        color: black; /* Text color remains unaffected */
+        border-radius: 50%;
+}
+@media (min-width: 768px) {
+    .card-body1 {
+        width: 48%; /* Two cards per row for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-body1 {
+        width: 30%; /* Three cards per row for larger screens */
+    }
+}
+
+#timerButton {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    
+    background-color: #ffc800;
+    color: white;
+    border: none;
+    margin-left: 180px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+#timerButton :hover {
+    font-family: 'Roundy Rainbows', sans-serif;
+    background-color: white;
+    color: #ffc800;
+}
+#SavingButton{
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    width: 300px;
+    height: 70px;
+    border-radius: 15px;
+    
+    background-color: #ffc800;
+    color: white;
+    border: none;
+    margin-bottom: -10px;
+    margin-left: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+#Expensebutton{
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 50;
+    font-size: 18px;
+    width: 300px;
+    height: 70px;
+    border-radius: 15px;
+    
+    background-color: #ffc800;
+    color: white;
+    border: none;
+    margin-left: 50px;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s;
+}
+
+#otherbutton{
+font-family:'Roundy Rainbows', sans-serif;
+font-weight: 50;
+font-size: 18px;
+width: 300px;
+height: 70px;
+border-radius: 15px;
+margin-top: -80px;
+background-color: #ffc800;
+color: white;
+border: none;
+margin-left: 50px;
+cursor: pointer;
+outline: none;
+transition: background-color 0.3s;
+}
+
+/* Default styling for the buttons */
+#SavingButton, #Expensebutton, #otherbutton {
+    transition: background-color 0.5s, transform 0.5s; /* Smooth animation */
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+}
+@media (max-width: 576px) {
+    #SavingButton, #Expensebutton, #otherbutton {
+        min-width: 100px; /* Minimum width for very small screens */
+        font-size: 0.8rem; /* Further reduce font size */
+        padding: 6px 12px; /* Adjust padding further */
+    }
+}
+/* Add hover effect to emphasize interactivity */
+#SavingButton:hover, #Expensebutton:hover, #otherbutton:hover {
+    background-color: #005f73; /* Light gray */
+    cursor: pointer;
+}
+
+/* Highlight animation reset (optional if hover is removed) */
+.card-element {
+    transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+}
+
+/* Modal */
+/* Modal Styling */
+/* Enhanced Modal Styles */
+.modal {
+    font-family:'Roundy Rainbows', sans-serif;
+    font-weight: 100;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    
+    width: 400%;
+    height: 300%;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+.modal-content {
+    position: absolute;
+    top: 70%;
+    left: 62.5%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 400px;
+    margin: 0 auto;
+    display: flex;
+   
+}
+@media (max-width: 576px) {
+    .modal-content {
+        width: 95%; /* Expand further on very small screens */
+    }
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.btn-confirm, .btn-cancel {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.btn-confirm {
+    background-color: #ffc800;
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #333;
+    color: white;
+}
+.btn-close {
+    display: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    background-color: #333;
+    color: white;
+}
+.btn-category {
+    margin: 5px;
+    padding: 10px;
+    background-color: #ffc107;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#amountInput {
+    width: 100%;
+    padding: 10px;
+    margin: 15px 0;
+    border: 2px solid #ffc800;
+    border-radius: 15px;
+    font-size: 16px;
+    text-align: center;
+}
+  
+
+/* advice card */
+#financial-advice {
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+#advice-source {
+    display: block;
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+#last-updated {
+    font-size: 0.8em;
+    color: #888;
+} 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/*  alert toggle    customized */
+/* Custom Alert Styling */
+.custom-alert {
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    width: 30%;
+    height: 5%;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-alert.hidden {
+    display: none; /* Hidden by default */
+}
+
+
+.custom-alert-content {
+    background-color: #fff; /* Set background to white */
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1rem;
+  
+}
+
+@media (max-width: 576px) {
+    .custom-alert-content {
+        font-size: 0.9rem; /* Slightly smaller font for mobile */
+    }
+}
+
+
+.custom-alert-content p {
+    font-family: 'Roundy Rainbows', sans-serif;
+    margin: 0 0 20px;
+    font-size: 1.2rem;
+}
+
+.custom-alert-content .btn-confirm {
+    background-color: #ffc800;
+    color: #333;
+    border: 2px solid #ffc800;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.custom-alert-content .btn-confirm:hover {
+    background-color: #ffc800;
+    color: #fff;
+}
