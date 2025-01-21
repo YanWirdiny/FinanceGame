@@ -2,10 +2,10 @@
 
 const image = document.getElementById("center");
 image.addEventListener("mouseenter",()=> {
-    image.src = "icons/upsetcoin.png"
+    image.src = "icons/winkcoin.png"
 });
 image.addEventListener("mouseleave", () => {
-    image.src = "icons/winkcoin.png"; // Replace with the original image's filename
+    image.src = "icons/happycoin.png "; // Replace with the original image's filename
 });
 
 
@@ -15,13 +15,22 @@ function showCustomAlert(message) {
     const alertMessage = document.getElementById("alertMessage");
 
     alertMessage.innerText = message; // Set the alert message
-    alertBox.classList.remove("hidden"); // Show the alert
+    alertBox.classList.remove
+    ('hidden'); // Show the alert
+
+    const alertSound = new Audio("icons/90s-game-ui-6-185099.mp3");
+    alertSound.play();
+
+    setTimeout(()=> {
+        closeCustomAlert();
+    }, 3000);
+
 }
 
 // Function to close the custom alert
 function closeCustomAlert() {
-    const alertBox = document.getElementById("customAlert");
-    alertBox.classList.add("hidden"); // Hide the alert
+     const alertBox = document.getElementById('customAlert');
+    alertBox.classList.add('hidden');
 }
 
 
@@ -43,7 +52,7 @@ function startCountdown() {
         if (remainingTime <= 0) {
             clearInterval(countdownInterval);
             timerButton.textContent = '00:00:00'; // Timer expired
-            alert('The countdown has ended.');
+            showCustomAlert('The countdown has ended.');
             return;
         }
 
@@ -121,7 +130,19 @@ function highlightCard(cardId) {
     }, 1000); // Duration of the effect
 }
 
+// Wallet object to manage balance and categories
+const wallet = {
+    maxBalance: 1000, // Set the maximum balance for the wallet
+    currentBalance: 1000, // Initial balance
+};
 
+// Function to update wallet UI
+function updateWalletUI() {
+    const walletBalanceElement = document.getElementById("walletBalance");
+    if (walletBalanceElement) {
+        walletBalanceElement.innerText = `$${wallet.currentBalance.toFixed(2)}`;
+    }
+}
 
  function  distributeAmount(){
      const  amountInput = document.getElementById('amountInput').value;
@@ -131,6 +152,13 @@ function highlightCard(cardId) {
         showCustomAlert('Please enter a valid amount.');
         return;
     }
+     if (totalAmount > wallet.currentBalance){
+        showCustomAlert("Insuficient Amount !!")
+        return;
+     }
+     wallet.currentBalance -= totalAmount;
+     updateWalletUI();
+
     const savings = (totalAmount * 0.5).toFixed(2); // 50% for savings
     const expenses = (totalAmount * 0.3).toFixed(2); // 30% for expenses
     const other = (totalAmount * 0.2).toFixed(2);  // 20 %  for   others 
@@ -142,6 +170,8 @@ function highlightCard(cardId) {
      highlightCard('Expensebutton');
      highlightCard('otherbutton');
      resetCountdown();
+     showCustomAlert(`$${amount} deducted. Remaining wallet balance: $${wallet.currentBalance}`);
+
 
      closeEnterAmountModal();
 
@@ -155,7 +185,7 @@ function highlightCard(cardId) {
         showCustomAlert(`Amount confirmed: ${amount}`);
         closeEnterAmountModal();
     } else {
-        alert('Please enter an amount');
+        showCustomAlert('Please enter an amount');
     }
     
 }
@@ -208,6 +238,7 @@ let emergencyExpenses = [
 
 let currentExpense = null;
 let points = 0;
+let level = 1;
 
 
 // Function to show the emergency expense modal
@@ -216,6 +247,8 @@ function updatePointsDisplay() {
     console.log('Updating Points Display:', points);
     const pointsElement = document.querySelector(".list-group-item:nth-child(2)");
     pointsElement.innerText = `Points: ${points}`;
+    const levelElement = document.querySelector(".list-group-item:nth-child(1)");
+    levelElement.innerText = `Level: ${level}`;
 }
 
 function updateCategoryBalance(category, amount) {
@@ -233,7 +266,7 @@ function updateCategoryBalance(category, amount) {
     const newBalance = currentBalance - amount;
     button.innerText = `$${newBalance.toFixed(2)}`;
 
-    alert(`$${amount} has been deducted from ${category}`);
+    showCustomAlert(`$${amount} has been deducted from ${category}`);
 }
 
 
@@ -242,13 +275,13 @@ function deductExpense(category) {
     console.log('Category:', category, 'Expected Category:', currentExpense.expectedCategory);
     if (category === currentExpense.expectedCategory) {
         console.log('Correct Decision Made');
-        points++;
-        alert(" you win one point ")
+        incrementingPoints;
+        showCustomAlert(" you win one point ")
         updatePointsDisplay();
         closeEmergencyModal();;
     } else {
         console.log('Incorrect Category Chosen');
-        alert("Incorrect category. No points awarded.");
+        showCustomAlert("Incorrect category. No points awarded.");
         closeEmergencyModal();
     }
 
@@ -265,8 +298,8 @@ function handleExpense(decision) {
     if (!(decision !== currentExpense.expectedDecision)) {
         if(decision === "no"){
         console.log('Correct Decision Made');
-        points++;
-        alert(" you win one point ")
+        incrementingPoints();
+        showCustomAlert(" you win one point ")
         updatePointsDisplay();
         closeEmergencyModal();
         }if(decision == "yes"){
@@ -277,12 +310,23 @@ function handleExpense(decision) {
     
     if(decision !== currentExpense.expectedDecision) {
         console.log('Incorrect Decision Made');
-        alert("Incorrect answer. No points awarded.");
+        showCustomAlert("Incorrect answer. No points awarded.");
         closeEmergencyModal();
     }
 }
 
-
+function incrementingPoints(){
+    points++;
+    if(points >=4){
+        incrementingLevel();   
+        points= 0
+    }
+    updatePointsDisplay();
+}
+function incrementingLevel(){
+    level++;
+    showCustomAlert("you have reached the next level")
+}
 function showEmergencyModal() {
     const modal = document.getElementById("emergencyModal");
 
@@ -306,10 +350,59 @@ function closeEmergencyModal() {
 
 
 
+// api call  for 
+async function showEmergencyModal() {
+    const modal = document.getElementById("emergencyModal");
+
+    try {
+        // Fetch a random dilemma from the API
+        const response = await fetch('http://localhost:3000/dilemmas/random');
+        if (!response.ok) {
+            throw new Error('Failed to fetch dilemma');
+        }
+
+        const dilemma = await response.json();
+        currentExpense = dilemma; // Store the fetched dilemma for further logic
+
+        // Update modal content dynamically
+        document.getElementById("expenseDescription").innerText = dilemma.description;
+        document.getElementById("expenseValue").innerText = `$${dilemma.amount}`;
+        document.getElementById("expenseImportance").innerText = dilemma.importance;
+
+        // Display the modal
+        modal.style.display = "block";
+    } catch (error) {
+        console.error('Error fetching dilemma:', error);
+        showCustomAlert('Error fetching emergency dilemma. Please try again.');
+    }
+}
+
+
+// create a function  that   add 1 to the streak after  each  24 hours 
+let streak = 0;
+ 
+function  startStreakUpdater(){
+    const streakElement = document.querySelector(".list-group-item:nth-child(3)");
+
+    // Load streak from localStorage (to persist streak after refreshing)
+    if (localStorage.getItem("streak")) {
+        streak = parseInt(localStorage.getItem("streak"), 10);
+        streakElement.innerText = `Streak: ${streak}`
+}
+
+setInterval( () => {
+    streak++;
+    streakElement.innerText = `Streak: ${streak}`;
+    localStorage.setItem("streak",streak); // to save to local storage 
+    showCustomAlert(" congratulations ! your  streak as been updated ")
+}, 24 * 60 *60 * 1000)
+}
 // Trigger the emergency expense modal every 2 minutes for testing
 //setInterval(showEmergencyModal, .7* 60 * 1000);
 
-
+document.addEventListener("DOMContentLoaded", ()=> {
+     startStreakUpdater();
+});
 
 
 
@@ -355,4 +448,3 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check for updates every hour
     setInterval(updateFinancialAdvice, 2000); // 5 second in milliseconds
 });
-

@@ -6,21 +6,28 @@
     font-weight: 100;
     font-style: normal;
 }
+
+
 body {
- 
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-family: 'Roboto', sans-serif;
     color: #333;
     line-height: 1.6;
-   
-    background-color: #f4f4f9;;
+    background-color: #f4f4f9;
 }
 h1 {
-    color: #3498db;
+    font-size: clamp(1.5rem, 2.5vw, 3rem); /* Scales between 1.5rem and 3rem */
     text-align: center;
 }
 
 h5, h6 {
     font-family:'Roundy Rainbows', sans-serif;
     font-weight: 100;
+}
+p {
+    font-size: clamp(0.9rem, 1.2vw, 1.2rem); /* Scales between 0.9rem and 1.2rem */
 }
 
 a {
@@ -55,9 +62,10 @@ nav {
         z-index: 1000; 
 }
 .container {
-    width: 80%;
+    width: 90%; /* Adjusted for smaller screens */
+    max-width: 1200px;
     margin: 0 auto;
-
+    padding: 1em;
 }
  header, footer{
     background-color: #333;
@@ -97,32 +105,38 @@ nav {
 
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .container {
-        width: 100%;
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%; /* Adjust for smaller screens */
+    background-color: #1a1a1a;
+    padding: 10px;
+    border-radius: 25px;
+    z-index: 1000;
+}
+
+@media (max-width: 576px) {
+    nav {
+        flex-wrap: wrap; /* Wrap icons to the next row */
+        padding: 15px;
     }
 
-    nav {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        position: fixed;
-        bottom: 0;
-        left: 40%;
-        transform: translateX(-50%);
-        width: 30%; /* Adjust width as needed */
-        background-color: #1a1a1a; /* Dark background color */
-        padding: 15px;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        transition: bottom 0.5s ease, top 0.5s ease; /* Transition for movement */
-        z-index: 1000;
-       
+    .nav-button img {
+        width: 20px; /* Reduce icon size for mobile */
+        height: 20px;
     }
-    nav {
-        flex-direction: column;
-    }
-}.nav-button {
+}
+
+
+
+
+
+.nav-button {
      background: none;
      border: none;
      cursor: pointer;
@@ -180,19 +194,43 @@ nav {
     transition: opacity 0.9s ease;
     opacity: 1;
 }
-.card-element{
-    
-        background-color: rgba(245, 245, 250, 1); /* White with 70% opacity */
-        padding: 10px;
-        color: black; /* Text color remains unaffected */
-  
+.card-element {
+    width: 100%; /* Full width on small screens */
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 15px;
 }
+
+@media (min-width: 768px) {
+    .card-element {
+        width: 48%; /* Two cards per row for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-element {
+        width: 30%; /* Three cards per row for larger screens */
+    }
+}
+
 .card-body1{
     background-color: rgba(245, 245, 250, 1); /* White with 70% opacity */
         padding: 10px;
         color: black; /* Text color remains unaffected */
         border-radius: 50%;
 }
+@media (min-width: 768px) {
+    .card-body1 {
+        width: 48%; /* Two cards per row for medium screens */
+    }
+}
+
+@media (min-width: 1024px) {
+    .card-body1 {
+        width: 30%; /* Three cards per row for larger screens */
+    }
+}
+
 #timerButton {
     font-family:'Roundy Rainbows', sans-serif;
     font-weight: 50;
@@ -275,7 +313,13 @@ transition: background-color 0.3s;
     border: none;
     border-radius: 8px;
 }
-
+@media (max-width: 576px) {
+    #SavingButton, #Expensebutton, #otherbutton {
+        min-width: 100px; /* Minimum width for very small screens */
+        font-size: 0.8rem; /* Further reduce font size */
+        padding: 6px 12px; /* Adjust padding further */
+    }
+}
 /* Add hover effect to emphasize interactivity */
 #SavingButton:hover, #Expensebutton:hover, #otherbutton:hover {
     background-color: #005f73; /* Light gray */
@@ -317,6 +361,11 @@ transition: background-color 0.3s;
     margin: 0 auto;
     display: flex;
    
+}
+@media (max-width: 576px) {
+    .modal-content {
+        width: 95%; /* Expand further on very small screens */
+    }
 }
 
 .modal-buttons {
@@ -392,16 +441,22 @@ transition: background-color 0.3s;
     font-size: 0.8em;
     color: #888;
 } 
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 
 /*  alert toggle    customized */
 /* Custom Alert Styling */
 .custom-alert {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0); /* Semi-transparent background */
+    position: absolute;
+    top: 10%;
+    left: 35%;
+    width: 30%;
+    height: 5%;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -414,15 +469,22 @@ transition: background-color 0.3s;
 
 
 .custom-alert-content {
-    background-color: #fff; /* Matches your aesthetic */
-    color: #333; /* Text color */
-    padding: 20px;
+    background-color: #fff; /* Set background to white */
+    width: 90%;
+    max-width: 300px;
+    padding: 15px;
     border-radius: 10px;
     text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 300px;
-    animation: fadeIn 0.5s ease-in-out;
+    font-size: 1rem;
+  
 }
+
+@media (max-width: 576px) {
+    .custom-alert-content {
+        font-size: 0.9rem; /* Slightly smaller font for mobile */
+    }
+}
+
 
 .custom-alert-content p {
     font-family: 'Roundy Rainbows', sans-serif;
