@@ -20,7 +20,7 @@
   </button></button>
     <button class="nav-button" onclick="showHowToPlayModal()">
       <img src="icons\question mark.png" alt="Home" class="icon-image"></button>
-    <button class="nav-button" onclick="showSection('profile')">
+    <button class="nav-button" onclick="showProfileModal()">
       <img src="icons\profile.png" alt="Home" class="icon-image">
     </button>
     <button class="nav-button" onclick="showSection('about')">
@@ -40,7 +40,7 @@
           </div>
         </div>
 
-        <div class="card" style="border-radius: 30px">
+        <div class="card" style="border-radius: 30px; width: 18rem;">
           <div class="card-body">
             <h5 class="card-title"> Add Funds to your wallet</h5>
             <p class="card-text">Please add any amount of  necessary 
@@ -54,14 +54,30 @@
         </div>
 
         <!-- Add this inside your first card where you have "list-group" -->
-    <div class="card" style="width: 18rem; border-radius: 30px;margin-top: 40px">
+       
+    <div class="card" style="width: 18rem; height: 9rem; border-radius: 30px;margin-top: 40px">
+      
         <div class="card-body">
+          <div id = "financial-literacy-section">
           <h5 class="card-title">Daily Financial Tip</h5>
-          <p id="financial-advice" class="card-text">Loading today's advice...</p>
-          <small id="advice-source" class="text-muted"></small>
-          <small id="last-updated" class="d-block mt-2"></small>
+          <h6 id="financial-term"></h6>
+          <h6 id="financial-definition"></h6>
       </div>
     </div>
+    </div>
+
+    <div class="card" style="width: 18rem; border-radius: 30px;margin-left: 19rem; height: 9rem ;margin-top: -145px;">
+      <div class="card-body">
+        <h5>Wallet Balance</h5>
+        <p id="walletBalance" style="font-size: 1.5rem; font-weight: bold;">$1000.00</p>
+    </div>
+  </div>
+   
+
+
+  
+    
+  
     </div>
     <div class="col-md-4 col-12">
         <div class="p-3 ">
@@ -79,7 +95,11 @@
               </div>
           </div>
       </div>
-
+    
+    
+    
+    
+    
 
       <!-- How to play modal -->
 
@@ -122,7 +142,25 @@
         <button class="btn-close" onclick="closeEmergencyModal()">Close</button>
     </div>
 </div>
+ 
+<!-- SHow and modify profile modal-->
 
+<div id="profileModal" class="modal" style="display: none;">
+  <div class="modal-content">
+      <h2>User Profile</h2>
+      <p><strong>Username:</strong> <span id="profileUsername">Guest</span></p>
+      <input type="text" id="newUsernameInput" placeholder="Change your username" style="width: 90%; padding: 10px; margin-top: 10px;">
+      
+      <p><strong>Points:</strong> <span id="profilePoints">0</span></p>
+      <p><strong>Level:</strong> <span id="profileLevel">1</span></p>
+      <p><strong>Streak:</strong> <span id="profileStreak">0</span></p>
+
+      <div class="modal-buttons">
+          <button class="btn-confirm" onclick="updateProfileUsername()">Save</button>
+          <button class="btn-cancel" onclick="closeProfileModal()">Close</button>
+      </div>
+  </div>
+</div>
 
     </div>
     <div class="col-md-4 col-12">
@@ -161,7 +199,7 @@
                 <div class="p-1 ">
                   <div class="card-element" style="width: 10rem;">
                     <div class="card-body1">
-                      <h6 class="card-title"></h6>
+                      <h6 class="card-title"></h6>  
                       <button id="otherbutton">$ 0</button>
                   </div>
                     </div>
@@ -193,6 +231,13 @@
   </div>
 </div>
 
-<script src="script.js"></script>
+</div>
+
+<script  src="script.js" defer></script>
+
+
+</body>
+</html>
+
 </body>
 </html>

@@ -2,7 +2,21 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
+    
+    "version": "1.0.0",
+"description": "",
+"main": "index.js",
+"scripts": {
+"start": "node index.js"
+},
+"dependencies": {
+"express": "^4.17.1",
+"firebase": "^9.6.10",
+"cors": "^2.8.5"
+},
+"devDependencies": {
+"nodemon": "^2.0.7"
+},
     "configurations": [
         {
             "type": "chrome",

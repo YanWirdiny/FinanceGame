@@ -72,6 +72,37 @@ function resetCountdown() {
     startCountdown(); // Restart the countdown timer
 }
 
+
+
+
+function showProfileModal() {
+    const modal = document.getElementById('profileModal');
+    modal.style.display = 'block';
+    fetchProfile(); // Fetch profile data when modal is opened
+}
+
+// Function to close the profile modal
+function closeProfileModal() {
+    const modal = document.getElementById('profileModal');
+    modal.style.display = 'none';
+}
+
+// Add event listeners for the profile button
+const profileButton = document.querySelector('.nav-button[onclick="showProfileModal()"]');
+if (profileButton) {
+    profileButton.addEventListener('click', showProfileModal);
+}
+
+// Close modal when clicking outside
+window.onclick = function(event) {
+    const profileModal = document.getElementById('profileModal');
+    if (event.target === profileModal) {
+        closeProfileModal();
+    }
+};
+
+
+
 /* Modal  nfor entering  money 
 
 */
@@ -411,40 +442,25 @@ document.addEventListener("DOMContentLoaded", ()=> {
 // Function to fetch and display financial advice
 async function updateFinancialAdvice() {
     try {
-        // Fetch financial advice from the backend API
-        const response = await fetch('http://localhost:3000/api/financial-advice', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        });
-
-        if (!response.ok) {
-            throw new Error('Failed to fetch financial advice');
-        }
+        const response = await fetch('http://localhost:3000/api/financial-definition');
+        if (!response.ok) throw new Error('Failed to fetch financial advice');
 
         const data = await response.json();
-
-        // Update the DOM with the fetched advice
-        document.getElementById('financial-advice').textContent = data.advice;
-        document.getElementById('advice-source').textContent = 'Source: AI Model';
-        document.getElementById('last-updated').textContent = `Updated: ${new Date().toLocaleDateString()}`;
+        document.getElementById('financial-term').textContent = data.term;
+        document.getElementById('financial-definition').textContent = data.definition;
     } catch (error) {
         console.error('Error updating financial advice:', error);
-
-        // Update placeholder text to reflect an error
-        document.getElementById('financial-advice').textContent = 'Unable to load financial advice. Please try again later.';
-        document.getElementById('advice-source').textContent = '';
-        document.getElementById('last-updated').textContent = '';
+        document.getElementById('financial-term').textContent = 'Unable to load financial term.';
+        document.getElementById('financial-definition').textContent = '';
     }
 }
 
-
-// Add this to your existing DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function() {
-    // Your existing code...
-    
-    // Initialize financial advice
+// Initialize functionalities on DOMContentLoaded
+window.addEventListener('DOMContentLoaded', () => {
+    startStreakUpdater();
+    updateWalletUI();
     updateFinancialAdvice();
-    
-    // Check for updates every hour
-    setInterval(updateFinancialAdvice, 2000); // 5 second in milliseconds
+
+    setInterval(updateFinancialAdvice, 3600000); // Update financial advice every hour
 });
+
