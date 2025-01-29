@@ -282,6 +282,20 @@ function updatePointsDisplay() {
     levelElement.innerText = `Level: ${level}`;
 }
 
+
+function incrementingPoints(){
+    points++;
+    if(points >=4){
+        incrementingLevel();   
+        points= 0
+    }
+    updatePointsDisplay();
+}
+function incrementingLevel(){
+    level++;
+    showCustomAlert("you have reached the next level")
+} 
+
 function updateCategoryBalance(category, amount) {
     let buttonId;
     if (category.toLowerCase() === 'needs') buttonId = 'SavingButton';
@@ -301,63 +315,48 @@ function updateCategoryBalance(category, amount) {
 }
 
 
-// Function to deduct expense from the chosen category
 function deductExpense(category) {
     console.log('Category:', category, 'Expected Category:', currentExpense.expectedCategory);
-    if (category === currentExpense.expectedCategory) {
+    if (category.toLowerCase() === currentExpense.expectedCategory.toLowerCase()) {
         console.log('Correct Decision Made');
-        incrementingPoints;
-        showCustomAlert(" you win one point ")
-        updatePointsDisplay();
-        closeEmergencyModal();;
+        incrementingPoints();
+        showCustomAlert("You win one point!");
     } else {
         console.log('Incorrect Category Chosen');
         showCustomAlert("Incorrect category. No points awarded.");
-        closeEmergencyModal();
     }
 
     // Deduct the expense from the selected category
     const expenseAmount = currentExpense.amount;
     updateCategoryBalance(category, expenseAmount);
-
-    // Close the modal
     closeEmergencyModal();
+    updatePointsDisplay();
 }
-// Function to handle user decision (Yes/No)
+
 function handleExpense(decision) {
     console.log('Decision:', decision, 'Expected Decision:', currentExpense.expectedDecision);
-    if (!(decision !== currentExpense.expectedDecision)) {
-        if(decision === "no"){
-        console.log('Correct Decision Made');
-        incrementingPoints();
-        showCustomAlert(" you win one point ")
-        updatePointsDisplay();
-        closeEmergencyModal();
-        }if(decision == "yes"){
-            //show  caetgory of choice
-            document.getElementById('categorySelection').style.display = " block";
+    if (decision === currentExpense.expectedDecision) {
+        if (decision === "no") {
+            incrementingPoints();
+            closeEmergencyModal();
+        } else if (decision === "yes") {
+            document.getElementById('categorySelection').style.display = "block";
         }
-    } 
+    } else {
+        console.log('Incorrect Decision Made');
+        showCustomAlert("Incorrect answer. No points awarded.");
+    }
+
     
     if(decision !== currentExpense.expectedDecision) {
         console.log('Incorrect Decision Made');
         showCustomAlert("Incorrect answer. No points awarded.");
         closeEmergencyModal();
     }
-}
-
-function incrementingPoints(){
-    points++;
-    if(points >=4){
-        incrementingLevel();   
-        points= 0
-    }
     updatePointsDisplay();
 }
-function incrementingLevel(){
-    level++;
-    showCustomAlert("you have reached the next level")
-}
+
+
 function showEmergencyModal() {
     const modal = document.getElementById("emergencyModal");
 
