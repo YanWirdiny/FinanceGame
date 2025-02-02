@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yan Budgeting App</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+ 
+  
+</head>
+<body>
+
+
+<!-- Navbar -->
+<nav >
+    <button class="nav-button" onclick="showSection('home')"
+    > <img src="icons\home.png" alt="Home" class="icon-image">
+  </button></button>
+    <button class="nav-button" onclick="showHowToPlayModal()">
+      <img src="icons\question mark.png" alt="Home" class="icon-image"></button>
+    <button class="nav-button" onclick="showProfileModal()">
+      <img src="icons\profile.png" alt="Home" class="icon-image">
+    </button>
+    <button class="nav-button" onclick="showAuthentificationModal()">
+      <img src="icons\info.png" alt="Home" class="icon-image">
+    </button>
+</nav>
+<div class="container-fluid">
+  <div class="row  ">
+    <div class="col-md-4 col-12 ">
+     <div class=" mb-90px ">
+        <div class="card " style="width: 18rem; border-radius: 30px; margin-top: 90px">
+            <ul class="list-group list-group-flush"  style="border-radius: 30px">
+              <li class="list-group-item">Level   : 0 </li>
+              <li class="list-group-item">Points : 0</li>
+              <li class="list-group-item">Streak : 0</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card" style="border-radius: 30px; width: 18rem;">
+          <div class="card-body">
+            <h5 class="card-title"> Add Funds to your wallet</h5>
+            <p class="card-text">Please add any amount of  necessary 
+              funds  needed to  your wallet</p>
+              <a  
+              class="btn btn-primary" 
+              style="border-radius: 15px; background-color: #ffc800; border-color: #ffc800;"
+              onclick="showEnterAmountModal()">Add Funds</a>
+           
+          </div>
+        </div>
+
+        <!-- Add this inside your first card where you have "list-group" -->
+       
+    <div class="card" style="width: 18rem; height: 9rem; border-radius: 30px;margin-top: 40px">
+      
+        <div class="card-body">
+          <div id = "financial-literacy-section">
+          <h5 class="card-title">Daily Financial Tip</h5>
+          <h6 id="financial-term"></h6>
+          <h6 id="financial-definition"></h6>
+      </div>
+    </div>
+    </div>
+
+    <div class="card" style="width: 18rem; border-radius: 30px;margin-left: 19rem; height: 9rem ;margin-top: -145px;">
+      <div class="card-body">
+        <h5>Wallet Balance</h5>
+        <p id="walletBalance" style="font-size: 1.5rem; font-weight: bold;">$1000.00</p>
+    </div>
+  </div>
+   
+
+
+  
+    
+  
+    </div>
+    <div class="col-md-4 col-12">
+        <div class="p-3 ">
+          <img src="icons\winkcoin.png" alt=" cetral image " class ="center" id="center">
+        </div>
+
+        <div id="enterAmountModal" class="modal">
+          <div class="modal-content">
+              <h2>Enter Amount</h2>
+              <img src="happycoin-removebg-preview.png" alt="icons\happycoin.png" class="modal-image">
+              <input type="number" id="amountInput" placeholder="Enter amount">
+              <div class="modal-buttons">
+                  <button class="btn-confirm" onclick="confirmAmount()">Confirm</button>
+                  <button class="btn-cancel" id="closeModalButton" onclick="closeEnterAmountModal()">Cancel</button>
+              </div>
+          </div>
+      </div>
+    
+    
+    
+    
+    
+
+      <!-- How to play modal -->
+
+      <!-- How to Play Modal -->
+<div id="howToPlayModal" class="modal">
+  <div class="modal-content">
+      <h2>How to Play</h2>
+      <p>Welcome to the budgeting game! Here's how to play:</p>
+      <ol>
+          <li>Enter the amount of money you want to allocate.</li>
+          <li>The game will automatically divide it into three categories: Savings, Expenses, and Other.</li>
+          <li>Track your progress as the countdown timer updates every 24 hours.</li>
+          <li>Make sure to stick to your budget and aim for financial goals!</li>
+      </ol>
+      <p>Enjoy managing your finances and leveling up your budgeting skills!</p>
+      <div class="modal-buttons">
+          <button class="btn-confirm" onclick="closeHowToPlayModal()">Close</button>
+      </div>
+  </div>
+</div>
+
+<!--  emergency expenses   modal -->
+  <!-- Emergency Expense Modal -->
+  <div id="emergencyModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+        <h2>Emergency Expense</h2>
+        <p id="expenseDescription">A sudden medical bill has appeared!</p>
+        <p id="expenseAmount">Expense Amount: $<span id="expenseValue">0</span></p>
+        <p>Importance Level: <span id="expenseImportance">High</span></p>
+        <div class="modal-buttons">
+            <button class="btn-confirm" onclick="handleExpense('yes')">Yes</button>
+            <button class="btn-cancel" onclick="handleExpense('no')">no</button>
+        </div>
+        <div id="categorySelection" style="display: none; margin-top: 20px;">
+            <p>Select a category to deduct the expense:</p>
+            <button class="btn-category" onclick="deductExpense('Needs')">Needs</button>
+            <button class="btn-category" onclick="deductExpense('Wants')">Wants</button>
+            <button class="btn-category" onclick="deductExpense('Savings')">Savings</button>
+        </div>
+        <button class="btn-close" onclick="closeEmergencyModal()">Close</button>
+    </div>
+</div>
+ 
+<!-- SHow and modify profile modal-->
+
+<div id="profileModal" class="modal" style="display: none;">
+  <div class="modal-content">
+      <h2>User Profile</h2>
+      <p><strong>Username:</strong> <span id="profileUsername">Guest</span></p>
+      <input type="text" id="newUsernameInput" placeholder="Change your username" style="width: 90%; padding: 10px; margin-top: 10px;">
+      
+      <p><strong>Points:</strong> <span id="profilePoints">0</span></p>
+      <p><strong>Level:</strong> <span id="profileLevel">1</span></p>
+      <p><strong>Streak:</strong> <span id="profileStreak">0</span></p>
+
+      <div class="modal-buttons">
+          <button class="btn-confirm" onclick="updateProfileUsername()">Save</button>
+          <button class="btn-cancel" onclick="closeProfileModal()">Close</button>
+      </div>
+  </div>
+</div>
+<!--  login modal-->
+<div id="authModal" class="modal">
+  <div class="modal-content">
+      <h2>Login or Sign Up</h2>
+      <input type="text" id="authUsername" placeholder="Username">
+      <input type="password" id="authPassword" placeholder="Password">
+      <input type="email" id="authEmail" placeholder="Email (for signup)">
+      <button class="btn-confirm" onclick="signup()">Sign Up</button>
+      <button class="btn-confirm" onclick="login()">Login</button>
+      <button class="btn-cancel" onclick="closeAuthModal()">Close</button>
+  </div>
+<!-- verification code-->
+  <div id="verificationModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <h2>Verify Your Account</h2>
+        <input type="text" id="verifyUsername" placeholder="Username">
+        <input type="text" id="verificationCode" placeholder="Enter verification code">
+        <button class="btn-confirm" onclick="confirmSignup()">Confirm Signup</button>
+        <button class="btn-cancel" onclick="closeVerificationModal()">Close</button>
+    </div>
+</div>
+
+
+
+</div>
+
+    </div>
+    <div class="col-md-4 col-12">
+        <div class="p-1 ">
+          <div class="card-element" style="width: 10rem;">
+            <div class="card-body1">
+              <h6 class="card-title"></h6>
+              <button id="timerButton">$ 0</button>
+          </div>
+          <div class="col-md-4 col-12">
+            <div class="p-0">
+              <div class="card-element" style="width: 10rem;">
+                <div class="card-body1">
+                  <h6 class="card-title"></h6>
+                  <button id="SavingButton">$ 0</button>
+              </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <div class="p-1 ">
+                <div class="card-element" style="width: 10rem;">
+                  <div class="card-body1">
+                    <h6 class="card-title"></h6>
+                    <button id="Expensebutton">$ 0</button>
+                   </div>
+                  </div>
+                </div>
+              </div>
+   
+
+             
+
+
+              <div class="col-md-4 col-12">
+                <div class="p-1 ">
+                  <div class="card-element" style="width: 10rem;">
+                    <div class="card-body1">
+                      <h6 class="card-title"></h6>  
+                      <button id="otherbutton">$ 0</button>
+                  </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4 col-12">
+                  <div class="p-1 ">
+                    <div class="card-element" style="width: 10rem;">
+                      <div class="card-body1">
+                        <h6 class="card-title"></h6>
+                        <button id="Expensebutton" onclick="showEmergencyModal()">Csv file </button>
+                       </div>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+<
+
+
+ <!--   alert toggle  personalized -->
+
+ <div id="customAlert" class="custom-alert  hidden ">
+  <div class="custom-alert-content">
+      <p id="alertMessage">This is a custom alert message.</p>
+      <button class="btn-confirm" onclick="closeCustomAlert()">OK</button>
+  </div>
+</div>
+
+</div>
+
+<script  src="script.js" defer></script>
+
+
+</body>
+</html>
+
+</body>
+</html>

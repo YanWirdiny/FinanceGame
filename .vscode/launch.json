@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    
+    "version": "1.0.0",
+"description": "",
+"main": "index.js",
+"scripts": {
+"start": "node index.js"
+},
+"dependencies": {
+"express": "^4.17.1",
+"firebase": "^9.6.10",
+"cors": "^2.8.5",
+"express-session": "^1.18.1",
+    "openid-client": "^5.7.0"
+},
+"devDependencies": {
+"nodemon": "^2.0.7"
+},
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:8080",
+            "webRoot": "${workspaceFolder}"
+        }
+    ]
+}
