@@ -379,6 +379,7 @@ function closeEmergencyModal() {
 }
 
 
+<<<<<<< HEAD
 // Function to show the login modal
 function showAuthentificationModal() {
     document.getElementById("authModal").style.display = "block";
@@ -507,6 +508,8 @@ function logout() {
     showCustomAlert("You have been logged out.");
 }
 
+=======
+>>>>>>> 298947db51210f3dbab5b2778940e7768e6b7f94
 
 // api call  for 
 async function showEmergencyModal() {
@@ -582,14 +585,20 @@ async function updateFinancialAdvice() {
     }
 }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 298947db51210f3dbab5b2778940e7768e6b7f94
 // Initialize functionalities on DOMContentLoaded
 window.addEventListener('DOMContentLoaded', () => {
     startStreakUpdater();
     updateWalletUI();
     updateFinancialAdvice();
+<<<<<<< HEAD
     verifyToken();
+=======
+>>>>>>> 298947db51210f3dbab5b2778940e7768e6b7f94
 
     setInterval(updateFinancialAdvice, 3600000); // Update financial advice every hour
 });
