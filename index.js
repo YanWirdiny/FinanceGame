@@ -4,7 +4,6 @@ const cors = require('cors');
 const path = require('path');
 const AWS = require('aws-sdk'); // AWS SDK for Cognito
 const crypto = require('crypto');
-
 // Initialize Express app
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -12,13 +12,7 @@
 "dependencies": {
 "express": "^4.17.1",
 "firebase": "^9.6.10",
-<<<<<<< HEAD
-"cors": "^2.8.5",
-"express-session": "^1.18.1",
-    "openid-client": "^5.7.0"
-=======
 "cors": "^2.8.5"
->>>>>>> 298947db51210f3dbab5b2778940e7768e6b7f94
 },
 "devDependencies": {
 "nodemon": "^2.0.7"
